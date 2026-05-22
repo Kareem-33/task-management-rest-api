@@ -83,8 +83,10 @@ Create a `.env` file in the root directory:
 ```env
 PORT=3535
 
-mongoURI=mongolink
+mongoURI=your_mongodb_connection_string
 ```
+
+Replace `your_mongodb_connection_string` with your MongoDB Atlas connection URI.
 
 ---
 
