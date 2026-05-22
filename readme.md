@@ -267,6 +267,28 @@ using Mongoose and environment variables.
 npm run dev
 ```
 
+Runs the project using `tsx` in development mode.
+
+---
+
+## Build project
+
+```bash
+npm run build
+```
+
+Compiles TypeScript files into JavaScript using the TypeScript compiler.
+
+---
+
+## Start production server
+
+```bash
+npm start
+```
+
+Runs the compiled JavaScript files from the `dist` folder.
+
 ---
 
 # Dependencies
