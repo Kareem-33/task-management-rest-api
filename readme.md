@@ -1,8 +1,6 @@
 # Task Management REST API
 
-A professional REST API built with Node.js, Express, TypeScript, MongoDB, and Mongoose for managing tasks.
-
-This project was developed as a Backend API project using RESTful architecture principles.
+A professional RESTful Task Management API developed as part of a Full Stack Development Internship using Node.js, Express, TypeScript, MongoDB, and Mongoose.
 
 ---
 
@@ -18,7 +16,8 @@ This project was developed as a Backend API project using RESTful architecture p
 * TypeScript support
 * Request validation
 * Error handling
-* RESTful API structure
+* RESTful API architecture
+* Modular project structure
 
 ---
 
@@ -47,6 +46,9 @@ src/
 ├── routes/
 │   └── task.routes.ts
 │
+├── utils/
+│   └── db.ts
+│
 └── server.ts
 ```
 
@@ -57,13 +59,13 @@ src/
 ## Clone the repository
 
 ```bash
-git clone https://github.com/your-username/full-stack-intern-project-2.git
+git clone https://github.com/your-username/task-management-rest-api.git
 ```
 
-## Navigate to the project folder
+## Navigate into the project
 
 ```bash
-cd full-stack-intern-project-2
+cd task-management-rest-api
 ```
 
 ## Install dependencies
@@ -80,7 +82,8 @@ Create a `.env` file in the root directory:
 
 ```env
 PORT=3535
-MONGO_URI=your_mongodb_connection_string
+
+mongoURI=mongolink
 ```
 
 ---
@@ -192,12 +195,31 @@ PUT /v1/tasks/:id
 }
 ```
 
+### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Task updated successfully",
+  "data": {}
+}
+```
+
 ---
 
 ## Delete Task
 
 ```http
 DELETE /v1/tasks/:id
+```
+
+### Success Response
+
+```json
+{
+  "success": true,
+  "message": "Task deleted successfully"
+}
 ```
 
 ---
@@ -211,7 +233,7 @@ The API includes:
 * Proper HTTP status codes
 * Internal server error handling
 
-### Status Codes
+### Status Codes Used
 
 | Status Code | Description           |
 | ----------- | --------------------- |
@@ -223,22 +245,21 @@ The API includes:
 
 ---
 
-# Task Model
+# Database Connection
 
-```ts
-{
-  title: string;
-  description?: string;
-}
+MongoDB connection is handled separately inside:
+
+```bash
+src/utils/db.ts
 ```
 
-Mongoose timestamps are enabled automatically.
+using Mongoose and environment variables.
 
 ---
 
 # Scripts
 
-## Start development server
+## Run development server
 
 ```bash
 npm run dev
@@ -261,3 +282,9 @@ Main packages used in this project:
 # Author
 
 Kareem Refaat
+
+---
+
+# License
+
+This project is licensed under the ISC License.
