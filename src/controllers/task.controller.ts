@@ -4,7 +4,21 @@ import mongoose from "mongoose";
 
 export const getAllTasks = async (req: Request, res: Response) => {
   try {
-    const tasks = await Task.find();
+    const { completed, sort } = req.query;
+
+    const filter: any = {};
+    if (completed !== undefined) {
+      filter.completed = completed === 'true';
+    }
+
+    let sortOption: any = {};
+    if (sort === 'newest') {
+      sortOption = { createdAt: -1 };
+    } else if (sort === 'oldest') {
+      sortOption = { createdAt: 1 };
+    }
+
+    const tasks = await Task.find(filter).sort(sortOption);
 
     res.status(200).json({
       success: true,
