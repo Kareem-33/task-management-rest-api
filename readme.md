@@ -83,8 +83,10 @@ Create a `.env` file in the root directory:
 ```env
 PORT=3535
 
-mongoURI=mongolink
+mongoURI=your_mongodb_connection_string
 ```
+
+Replace `your_mongodb_connection_string` with your MongoDB Atlas connection URI.
 
 ---
 
@@ -264,6 +266,28 @@ using Mongoose and environment variables.
 ```bash
 npm run dev
 ```
+
+Runs the project using `tsx` in development mode.
+
+---
+
+## Build project
+
+```bash
+npm run build
+```
+
+Compiles TypeScript files into JavaScript using the TypeScript compiler.
+
+---
+
+## Start production server
+
+```bash
+npm start
+```
+
+Runs the compiled JavaScript files from the `dist` folder.
 
 ---
 
