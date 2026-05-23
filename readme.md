@@ -1,6 +1,6 @@
-# Task Management REST API
+# Full Stack Task Management API
 
-A professional RESTful Task Management API developed as part of a Full Stack Development Internship using Node.js, Express, TypeScript, MongoDB, and Mongoose.
+A professional RESTful Task Management API built with Node.js, Express, TypeScript, MongoDB, and Mongoose as part of Full Stack Development Internship Projects 2 & 3.
 
 ---
 
@@ -11,13 +11,18 @@ A professional RESTful Task Management API developed as part of a Full Stack Dev
 * Get task by ID
 * Update tasks
 * Delete tasks
+* Filter tasks by completion status
+* Sort tasks by creation date
 * MongoDB database integration
 * Environment variables using dotenv
 * TypeScript support
 * Request validation
+* MongoDB ObjectId validation
 * Error handling
 * RESTful API architecture
 * Modular project structure
+* Mongoose schema validation
+* Timestamps support
 
 ---
 
@@ -59,13 +64,13 @@ src/
 ## Clone the repository
 
 ```bash
-git clone https://github.com/your-username/task-management-rest-api.git
+git clone https://github.com/your-username/full-stack-task-management-api.git
 ```
 
 ## Navigate into the project
 
 ```bash
-cd task-management-rest-api
+cd full-stack-task-management-api
 ```
 
 ## Install dependencies
@@ -83,20 +88,46 @@ Create a `.env` file in the root directory:
 ```env
 PORT=3535
 
-mongoURI=your_mongodb_connection_string
+MONGO_URI=your_mongodb_connection_string
 ```
 
 Replace `your_mongodb_connection_string` with your MongoDB Atlas connection URI.
 
 ---
 
-# Running the Project
+# Scripts
 
-## Development Mode
+## Run development server
 
 ```bash
 npm run dev
 ```
+
+Runs the project in development mode using tsx.
+
+---
+
+## Build project
+
+```bash
+npm run build
+```
+
+Compiles TypeScript files into JavaScript.
+
+---
+
+## Start production server
+
+```bash
+npm start
+```
+
+Runs the compiled JavaScript files from the `dist` folder.
+
+---
+
+# Running the Project
 
 The server will run on:
 
@@ -122,14 +153,19 @@ http://localhost:3535
 GET /v1/tasks
 ```
 
-### Success Response
+### Query Parameters
 
-```json
-{
-  "success": true,
-  "message": "Tasks fetched successfully",
-  "data": []
-}
+| Parameter       | Description          |
+| --------------- | -------------------- |
+| completed=true  | Get completed tasks  |
+| completed=false | Get incomplete tasks |
+| sort=newest     | Sort by newest first |
+| sort=oldest     | Sort by oldest first |
+
+### Example
+
+```http
+GET /v1/tasks?completed=true&sort=newest
 ```
 
 ---
@@ -138,20 +174,6 @@ GET /v1/tasks
 
 ```http
 GET /v1/tasks/:id
-```
-
-### Success Response
-
-```json
-{
-  "success": true,
-  "message": "Task fetched successfully",
-  "data": {
-    "_id": "task_id",
-    "title": "Learn Express",
-    "description": "Build REST API"
-  }
-}
 ```
 
 ---
@@ -171,16 +193,6 @@ POST /v1/tasks
 }
 ```
 
-### Success Response
-
-```json
-{
-  "success": true,
-  "message": "Task created successfully",
-  "data": {}
-}
-```
-
 ---
 
 ## Update Task
@@ -193,17 +205,8 @@ PUT /v1/tasks/:id
 
 ```json
 {
-  "title": "Updated Task Title"
-}
-```
-
-### Success Response
-
-```json
-{
-  "success": true,
-  "message": "Task updated successfully",
-  "data": {}
+  "title": "Updated Task Title",
+  "completed": true
 }
 ```
 
@@ -215,12 +218,17 @@ PUT /v1/tasks/:id
 DELETE /v1/tasks/:id
 ```
 
-### Success Response
+---
 
-```json
+# Task Schema
+
+```ts
 {
-  "success": true,
-  "message": "Task deleted successfully"
+  title: String,
+  description: String,
+  completed: Boolean,
+  createdAt: Date,
+  updatedAt: Date
 }
 ```
 
@@ -231,6 +239,7 @@ DELETE /v1/tasks/:id
 The API includes:
 
 * Required field validation
+* Mongoose schema validation
 * MongoDB ObjectId validation
 * Proper HTTP status codes
 * Internal server error handling
@@ -256,38 +265,6 @@ src/utils/db.ts
 ```
 
 using Mongoose and environment variables.
-
----
-
-# Scripts
-
-## Run development server
-
-```bash
-npm run dev
-```
-
-Runs the project using `tsx` in development mode.
-
----
-
-## Build project
-
-```bash
-npm run build
-```
-
-Compiles TypeScript files into JavaScript using the TypeScript compiler.
-
----
-
-## Start production server
-
-```bash
-npm start
-```
-
-Runs the compiled JavaScript files from the `dist` folder.
 
 ---
 
